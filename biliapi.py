@@ -7,6 +7,8 @@ class bilivid():
   def __init__(self, aid):
     raw = requests.get('https://api.bilibili.com/x/web-interface/view/detail?aid=' + str(aid))
     self.__INFO = json.loads(raw.text)
+    if self.__INFO['code'] != 0:
+      raise RuntimeError('Failed to get video info')
 
   @property
   def avid(self):
